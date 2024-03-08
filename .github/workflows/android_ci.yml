@@ -46,9 +46,9 @@ jobs:
           PASSWORD: ${{ secrets.KEY_PWD }}
           ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
-          sed -i "1s/123/${{ secrets.KEY_PWD }}/" keystore.properties
-          sed -i "2s/123/${{ secrets.KEY_PWD }}/" keystore.properties
-          sed -i "3s/123/${{ secrets.KEY_ALIAS }}/" keystore.properties
+          sed -i "1s/123/$PASSWORD/" keystore.properties
+          sed -i "2s/123/$PASSWORD/" keystore.properties
+          sed -i "3s/123/$ALIAS/" keystore.properties
           bash ./gradlew assembleRelease
 
 #      - name: Build with Gradle
