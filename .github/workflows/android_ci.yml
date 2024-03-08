@@ -49,8 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
         with:
-          tag_name: steps.create_tag.outputs.new_tag
-          release_name: Release 测试${{ steps.create_tag.outputs.new_tag }}
+          tag_name: ${{ steps.create_tag.outputs.new_tag }}
+          release_name: Release_${{ steps.create_tag.outputs.new_tag }}
           draft: false
           prerelease: false
 
