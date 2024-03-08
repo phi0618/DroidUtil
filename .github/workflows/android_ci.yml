@@ -23,16 +23,6 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      # 打包release
-      - name: Build with Gradle
-        env:
-          PASSWORD: ${{ secrets.PASSWORD }}
-          ALIAS: ${{ secrets.ALIAS }}
-        run: |
-          sed -i "1s/123/$KEY_PWD/" keystore.properties
-          sed -i "2s/123/$KEY_PWD/" keystore.properties
-          sed -i "3s/123/$KEY_ALIAS/" keystore.properties
-          bash ./gradlew assembleRelease
 
       # 创建并推送标签的步骤
       - name: Create tag
@@ -50,8 +40,19 @@ jobs:
           # 设置输出变量
           echo "::set-output name=new_tag::$current_time"
 
+      # 打包release
       - name: Build with Gradle
-        run: ./gradlew assembleDebug
+        env:
+          PASSWORD: ${{ secrets.PASSWORD }}
+          ALIAS: ${{ secrets.ALIAS }}
+        run: |
+          sed -i "1s/123/$PASSWORD/" keystore.properties
+          sed -i "2s/123/$PASSWORD/" keystore.properties
+          sed -i "3s/123/$ALIAS/" keystore.properties
+          bash ./gradlew assembleRelease
+
+#      - name: Build with Gradle
+#        run: ./gradlew assembleDebug
 
       - name: Create Release
         id: create_release
