@@ -2,9 +2,23 @@ plugins {
     alias(libs.plugins.androidApplication)
 }
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     namespace 'com.phi.droid'
     compileSdk 34
+
+
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
 
     defaultConfig {
         applicationId "com.phi.droid"
@@ -18,8 +32,12 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.config //配置签名文件
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config //配置签名文件
         }
     }
     compileOptions {
