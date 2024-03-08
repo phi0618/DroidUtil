@@ -16,13 +16,31 @@ jobs:
       - name: Set execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Set up JDK 17
+      - name: Set JDK
         uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
 
+
+      # 创建并推送标签的步骤
+      - name: Create tag
+        id: create_tag
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' # 仅在从 main 分支推送代码时执行
+        env:
+          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}  # 添加个人访问令牌作为环境变量
+        run: |
+          # 获取最新的 Git 版本号
+          export VERSION=$(git describe --abbrev=0 --tags)
+          # 将版本号加 1
+          export NEW_VERSION=$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+          echo "$NEW_VERSION"
+          # 创建新标签并推送到远程仓库
+          git tag $NEW_VERSION
+          git push --tags origin main  # 使用个人访问令牌进行身份验证
+          # 设置输出变量
+          echo "::set-output name=new_tag::$NEW_VERSION"
 
       - name: Build with Gradle
         run: ./gradlew assembleDebug
@@ -33,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
         with:
-          tag_name: 测试
+          tag_name: steps.create_tag.outputs.new_tag
           release_name: Release 测试3
           draft: false
           prerelease: false
