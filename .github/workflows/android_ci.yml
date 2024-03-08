@@ -37,10 +37,12 @@ jobs:
           export NEW_VERSION=$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
           echo "$NEW_VERSION"
           # 创建新标签并推送到远程仓库
-          git tag $NEW_VERSION
+          current_time=$(date +"%Y%m%d%H%M%S")
+          echo $current_time
+          git tag $current_time
           git push --tags origin main  # 使用个人访问令牌进行身份验证
           # 设置输出变量
-          echo "::set-output name=new_tag::$NEW_VERSION"
+          echo "::set-output name=new_tag::$current_time"
 
       - name: Build with Gradle
         run: ./gradlew assembleDebug
