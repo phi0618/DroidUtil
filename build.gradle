@@ -15,7 +15,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
             credentials {
                 username = "iusername@outlook.com"
-                password = "myPwdNull01"
+                password = System.getenv("DROID_TOKEN")
             }
         }
     }
