@@ -80,5 +80,5 @@ jobs:
         run: ./gradlew publish
         env: 
           GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
-          MAVEN_USERNAME: "BqvnA7cw"
-          MAVEN_PASSWORD: "krwVnYjeqPc2WpbPg2EFtWx3UvFh8ZLqs5hMuE/WajB6"
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
