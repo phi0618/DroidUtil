@@ -36,7 +36,7 @@ jobs:
           current_time=$(date +"%Y%m%d%H%M%S")
           echo $current_time
           git tag $current_time
-          git push --tags origin main  # 使用个人访问令牌进行身份验证
+          git push --tags origin main 
           # 设置输出变量
           echo "::set-output name=new_tag::$current_time"
 
