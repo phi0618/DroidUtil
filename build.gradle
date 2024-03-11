@@ -15,7 +15,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
             credentials {
                 username = "Ctjko0hu"
-                password = "DXs4R86Gkd0uuU2uN1a04YivDxX9VWNA3O6gyFrBZ//v"
+                password = "DXs4R86Gkd0uuU2uN1a04YivDxX9VWNA3O6gyFrBZ"
             }
         }
     }
