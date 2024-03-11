@@ -14,14 +14,14 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
             credentials {
-                username = "iusername@outlook.com"
-                password = System.getenv("DROID_TOKEN")
+                username = "Ctjko0hu"
+                password = "DXs4R86Gkd0uuU2uN1a04YivDxX9VWNA3O6gyFrBZ//v"
             }
         }
     }
     publications {
         gpr(MavenPublication) {
-            groupId = 'com.phi.droid'
+            groupId = 'com.phi.droid0618'
             artifactId = 'xutils'
             from(components.java)
         }
