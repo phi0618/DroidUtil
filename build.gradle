@@ -12,8 +12,8 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            // url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+            //url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
             credentials {
                 username = "BqvnA7cw"
                 password = "krwVnYjeqPc2WpbPg2EFtWx3UvFh8ZLqs5hMuE/WajB6"
