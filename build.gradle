@@ -16,7 +16,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/phi0618/DroidUtil")
             credentials {
                 username = "phi0618"
-                password = "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"
+                password = "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"
             }
         }
     }
