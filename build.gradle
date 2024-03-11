@@ -13,10 +13,10 @@ publishing {
         maven {
             name = "GitHubPackages"
             //url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            url = uri("https://maven.pkg.github.com/phi0618/droidutil")
+            url = uri("https://maven.pkg.github.com/phi0618/DroidUtil")
             credentials {
-                username = "BqvnA7cw"
-                password = "krwVnYjeqPc2WpbPg2EFtWx3UvFh8ZLqs5hMuE/WajB6"
+                username = "phi0618"
+                password = "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"
             }
         }
     }
