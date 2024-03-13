@@ -76,6 +76,12 @@ jobs:
           asset_name: app-release.apk
           asset_content_type: application/vnd.android.package-archive
 
+
+      - name: Set environment variables
+        run: |
+          echo "GITHUB_USERNAME=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
+          echo "GITHUB_TOKEN=${{ secrets.DROID_TOKEN }}" >> $GITHUB_ENV
+
       - name: Publish package
         run: ./gradlew publish
         env: 
