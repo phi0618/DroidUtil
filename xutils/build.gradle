@@ -30,7 +30,7 @@ android {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId "com.phi0618"
+            groupId "com.github.phi0618"
             artifactId "xutils"
             version "1.1.0"
             artifact "$buildDir/outputs/aar/xutils-release.aar"
