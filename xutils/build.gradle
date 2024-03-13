@@ -32,7 +32,7 @@ publishing {
         maven(MavenPublication) {
             groupId "com.phi0618"
             artifactId "xutils"
-            version "1.0.0"
+            version "1.1.0"
             artifact "$buildDir/outputs/aar/xutils-release.aar"
 
             // include any transitive dependencies
