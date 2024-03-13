@@ -24,7 +24,18 @@ publishing {
         gpr(MavenPublication) {
             groupId = 'com.phi.droid0618'
             artifactId = 'xutils'
+            version = '1.0.0'
+            
             from(components.java)
+
+           // 可选：配置其他元数据，比如描述、许可证等
+            description = '安卓常用工具类'
+            licenses {
+                license {
+                    name = 'The Apache License, Version 2.0'
+                    url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
         }
     }
 }
