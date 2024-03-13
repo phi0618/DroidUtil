@@ -2,55 +2,53 @@
 plugins {
 alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidLibrary) apply false
-    id("maven-publish")
-    id("java")
 }
 
 
-publishing {
+// publishing {
 
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            //url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            url = uri("https://maven.pkg.github.com/phi0618/DroidUtil")
-            credentials {
-                username = System.getenv("GIT_USER")
-                password = System.getenv("GIT_TOKEN")
-            }
-        }
-    }
+//     repositories {
+//         maven {
+//             name = "GitHubPackages"
+//             //url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+//             url = uri("https://maven.pkg.github.com/phi0618/DroidUtil")
+//             credentials {
+//                 username = System.getenv("GIT_USER")
+//                 password = System.getenv("GIT_TOKEN")
+//             }
+//         }
+//     }
 
-    publications {
-        gpr(MavenPublication) {
-            groupId = 'com.phi.phi0618'
-            artifactId = 'xutils'
-            version = '1.0.0'
+//     publications {
+//         gpr(MavenPublication) {
+//             groupId = 'com.phi.phi0618'
+//             artifactId = 'xutils'
+//             version = '1.0.0'
 
-            from(components.java)
+//             from(components.java)
 
-            // 可选：配置其他元数据，比如描述、许可证等
-            pom {
-                description = '安卓常用工具类'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-            }
-        }
-    }
-}
+//             // 可选：配置其他元数据，比如描述、许可证等
+//             pom {
+//                 description = '安卓常用工具类'
+//                 licenses {
+//                     license {
+//                         name = 'The Apache License, Version 2.0'
+//                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
-tasks.register('print_params') {
-    doLast {
-        def githubUsername = System.getenv("GIT_USER")
-        println "GitHub username: $githubUsername"
-    }
-}
+// tasks.register('print_params') {
+//     doLast {
+//         def githubUsername = System.getenv("GIT_USER")
+//         println "GitHub username: $githubUsername"
+//     }
+// }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
+// java {
+//     sourceCompatibility = JavaVersion.VERSION_17
+//     targetCompatibility = JavaVersion.VERSION_17
+// }
