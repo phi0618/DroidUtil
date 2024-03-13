@@ -43,6 +43,12 @@ publishing {
     }
 }
 
+tasks.register('print_params') {
+    doLast {
+        def githubUsername = System.getenv("GIT_USER")
+        println "GitHub username: $githubUsername"
+    }
+}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
