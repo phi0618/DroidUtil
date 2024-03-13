@@ -15,8 +15,8 @@ publishing {
             //url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
             url = uri("https://maven.pkg.github.com/phi0618/DroidUtil")
             credentials {
-                username = "phi0618"
-                password = "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"
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
             }
         }
     }
