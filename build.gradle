@@ -16,29 +16,33 @@ publishing {
             url = uri("https://maven.pkg.github.com/phi0618/DroidUtil")
             credentials {
                 username = "phi0618"
-                password = "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"
+                password = "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"
             }
         }
     }
+
     publications {
         gpr(MavenPublication) {
-            groupId = 'com.phi.droid0618'
+            groupId = 'com.phi.phi0618'
             artifactId = 'xutils'
             version = '1.0.0'
-            
+
             from(components.java)
 
-           // 可选：配置其他元数据，比如描述、许可证等
-            description = '安卓常用工具类'
-            licenses {
-                license {
-                    name = 'The Apache License, Version 2.0'
-                    url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            // 可选：配置其他元数据，比如描述、许可证等
+            pom {
+                description = '安卓常用工具类'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
                 }
             }
         }
     }
 }
+
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
