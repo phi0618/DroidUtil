@@ -81,6 +81,9 @@ jobs:
         run: |
           echo "GIT_USER=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
           echo "GIT_TOKEN=${{ secrets.DROID_TOKEN }}" >> $GITHUB_ENV
+          
+      - name: Debug
+        run: ./gradlew print_params
 
       - name: Publish package
         run: ./gradlew publish
