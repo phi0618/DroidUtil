@@ -10,13 +10,13 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: 拉取代码
         uses: actions/checkout@v2
 
       - name: Set execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Set JDK
+      - name: 设置 JDK
         uses: actions/setup-java@v2
         with:
           java-version: '17'
@@ -25,7 +25,7 @@ jobs:
 
 
       # 创建并推送标签的步骤,,
-      - name: Create tag
+      - name: 创建Tag
         id: create_tag
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' # 仅在从 main 分支推送代码时执行
         env:
@@ -41,7 +41,7 @@ jobs:
           echo "::set-output name=new_tag::$current_time"
 
       # 打包release
-      - name: Build with Gradle
+      - name: 修改打包签名文件
         env:
           PASSWORD: ${{ secrets.KEY_PWD }}
           ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -54,7 +54,7 @@ jobs:
 #      - name: Build with Gradle
 #        run: ./gradlew assembleDebug
 
-      - name: Create Release
+      - name: 打包Apk
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -65,27 +65,26 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload APK
+      - name: 打包模块utils
+        run: ./gradlew --project-dir xutils assemble
+    
+      - name: 上传APK
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/app-release.apk
-          asset_name: app-release.apk
+          asset_path: xutils/build/outputs/aar/xutils-release.aar
+          asset_name: xutils-release.aar
           asset_content_type: application/vnd.android.package-archive
 
-
-      - name: Set environment variables
+      - name: 设置发布环境
         run: |
           echo "GIT_USER=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
           echo "GIT_TOKEN=${{ secrets.DROID_TOKEN }}" >> $GITHUB_ENV
-          
-      - name: Debug
-        run: ./gradlew print_params
 
-      - name: Publish package
+      - name: 发布Maven
         run: ./gradlew publish
         env: 
           GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
