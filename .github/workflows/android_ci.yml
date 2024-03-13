@@ -79,8 +79,8 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "GITHUB_USERNAME=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
-          echo "GITHUB_TOKEN=${{ secrets.DROID_TOKEN }}" >> $GITHUB_ENV
+          echo "GIT_USER=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
+          echo "GIT_TOKEN=${{ secrets.DROID_TOKEN }}" >> $GITHUB_ENV
 
       - name: Publish package
         run: ./gradlew publish
