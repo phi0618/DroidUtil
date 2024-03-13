@@ -82,11 +82,11 @@ jobs:
       - name: 设置发布环境
         run: |
           echo "GIT_USER=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
-          echo "GIT_TOKEN=${{ secrets.DROID_TOKEN }}" >> $GITHUB_ENV
+          echo "GIT_TOKEN=${{ secrets.DROID_TOKEN_CLASSIC }}" >> $GITHUB_ENV
 
       - name: 发布Maven
         run: ./gradlew publish
         env: 
-          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN_CLASSIC }}
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
