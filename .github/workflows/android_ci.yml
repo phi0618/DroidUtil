@@ -24,7 +24,7 @@ jobs:
           cache: gradle
 
 
-      # 创建并推送标签的步骤
+      # 创建并推送标签的步骤,,
       - name: Create tag
         id: create_tag
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' # 仅在从 main 分支推送代码时执行
