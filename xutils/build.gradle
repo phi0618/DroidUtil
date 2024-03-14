@@ -3,6 +3,9 @@ plugins {
     id("maven-publish")
 }
 
+group = 'com.phi0618.droid'  
+version = 'v1.0.0' 
+
 android {
     namespace 'com.phi.xutils'
     compileSdk 34
@@ -63,6 +66,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
+            description = '安卓常用工具类'  
             url = uri("https://maven.pkg.github.com/phi0618/DroidUtil")
             credentials {
                 username = System.getenv("GIT_USER")
@@ -72,6 +76,53 @@ publishing {
     }
 }
 
+
+
+
+publishing {  
+    publications {  
+        mavenJava(MavenPublication) {  
+            groupId "com.phi0618.droid"
+            artifactId "xutils"
+            version "1.0.0"
+            artifact "$buildDir/outputs/aar/xutils-release.aar"
+  
+            pom {  
+                name = 'DroidUtil'  
+                description = '项目描述'  
+                url = 'https://github.com/phi0618/DroidUtil'  
+                description = '安卓常用工具类'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {  
+                    developer {  
+                        id = 'phi0618'  
+                        name = 'Wang'  
+                        email = 'iUserName@outlook.com'  
+                    }  
+                }  
+                scm {  
+                    connection = 'scm:git:git://github.com/phi0618/DroidUtil.git'  
+                    developerConnection = 'scm:git:ssh://github.com/phi0618/DroidUtil.git'  
+                    url = 'https://github.com/phi0618/DroidUtil'  
+                }  
+            }  
+        }  
+    }  
+    repositories {  
+        maven {  
+            url = uri('https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/')
+            credentials {  
+                username = System.getenv("SONA_USER")
+                password = System.getenv("SONA_PWD")
+            }  
+        }  
+    }  
+}
 
 dependencies {
     implementation libs.appcompat
