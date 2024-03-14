@@ -83,6 +83,8 @@ jobs:
         run: |
           echo "GIT_USER=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
           echo "GIT_TOKEN=${{ secrets.DROID_TOKEN_CLASSIC }}" >> $GITHUB_ENV
+          echo "SONA_USER=${{ secrets.OSSRH_USERNAME }}" >> $GITHUB_ENV
+          echo "SONA_PWD=${{ secrets.OSSRH_TOKEN }}" >> $GITHUB_ENV
 
       - name: 发布Maven
         run: ./gradlew publish
