@@ -65,16 +65,16 @@ jobs:
       - name: 打包模块utils
         run: ./gradlew --project-dir xutils assemble
     
-      - name: 上传aar
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: xutils/build/outputs/aar/xutils-release.aar
-          asset_name: xutils-release.aar
-          asset_content_type: application/vnd.android.package-archive
+      # - name: 上传aar
+      #   id: upload-release-asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: xutils/build/outputs/aar/xutils-release.aar
+      #     asset_name: xutils-release.aar
+      #     asset_content_type: application/vnd.android.package-archive
 
       - name: 设置发布环境
         run: |
