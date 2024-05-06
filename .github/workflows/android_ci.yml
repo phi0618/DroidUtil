@@ -29,12 +29,12 @@ jobs:
         id: create_tag
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' # 仅在从 main 分支推送代码时执行
         env:
-          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN_CLASSIC }}  # 添加个人访问令牌作为环境变量
+          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}  # 添加个人访问令牌作为环境变量
         run: |
           export TZ='Asia/Shanghai'
           # 创建新标签并推送到远程仓库
           # current_time=$(date +"%Y%m%d%H%M%S")
-          current_time="1.0.1"
+          current_time="1.0.0"
           echo $current_time
           git tag $current_time
           git push --tags origin main 
@@ -56,7 +56,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN_CLASSIC }}
+          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
         with:
           tag_name: ${{ steps.create_tag.outputs.new_tag }}
           release_name: Release_${{ steps.create_tag.outputs.new_tag }}
@@ -70,7 +70,7 @@ jobs:
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN_CLASSIC }}
+          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: xutils/build/outputs/aar/xutils-release.aar
@@ -80,13 +80,13 @@ jobs:
       - name: 设置发布环境
         run: |
           echo "GIT_USER=${{ secrets.USER_NAME }}" >> $GITHUB_ENV
-          echo "GIT_TOKEN=${{ secrets.DROID_TOKEN_CLASSIC }}" >> $GITHUB_ENV
+          echo "GIT_TOKEN=${{ secrets.DROID_TOKEN }}" >> $GITHUB_ENV
           echo "SONA_USER=${{ secrets.OSSRH_USERNAME }}" >> $GITHUB_ENV
           echo "SONA_PWD=${{ secrets.OSSRH_TOKEN }}" >> $GITHUB_ENV
 
       - name: 发布Maven
         run: ./gradlew publish
         env: 
-          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN_CLASSIC }}
+          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
