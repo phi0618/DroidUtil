@@ -42,26 +42,26 @@ jobs:
           echo "::set-output name=new_tag::$current_time"
 
       # 打包release
-      # - name: 修改打包签名文件
-      #   env:
-      #     PASSWORD: ${{ secrets.KEY_PWD }}
-      #     ALIAS: ${{ secrets.KEY_ALIAS }}
-      #   run: |
-      #     sed -i "1s/123/$PASSWORD/" keystore.properties
-      #     sed -i "2s/123/$PASSWORD/" keystore.properties
-      #     sed -i "3s/123/$ALIAS/" keystore.properties
-      #     bash ./gradlew assembleRelease
+      - name: 修改打包签名文件
+        env:
+          PASSWORD: ${{ secrets.KEY_PWD }}
+          ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          sed -i "1s/123/$PASSWORD/" keystore.properties
+          sed -i "2s/123/$PASSWORD/" keystore.properties
+          sed -i "3s/123/$ALIAS/" keystore.properties
+          bash ./gradlew assembleRelease
 
-      # - name: 打包Apk
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
-      #   with:
-      #     tag_name: ${{ steps.create_tag.outputs.new_tag }}
-      #     release_name: Release_${{ steps.create_tag.outputs.new_tag }}
-      #     draft: false
-      #     prerelease: false
+      - name: 打包Apk
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.DROID_TOKEN }}
+        with:
+          tag_name: ${{ steps.create_tag.outputs.new_tag }}
+          release_name: Release_${{ steps.create_tag.outputs.new_tag }}
+          draft: false
+          prerelease: false
 
       - name: 打包模块utils
         run: ./gradlew --project-dir xutils assemble
